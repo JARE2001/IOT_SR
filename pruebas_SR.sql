@@ -1,10 +1,9 @@
 USE `SR_IOT`;
---Pruebas Zona
+SELECT * FROM Lugar;
+
 SELECT * FROM Zona;
---Prueba Aspesrores
+
 SELECT * FROM Aspersores;
---Prueba Plantas
-SELECT * FROM Plantas;
 
 SELECT * FROM Arduinos;
 
@@ -14,17 +13,21 @@ SELECT * FROM Humedad_minuto;
 
 SELECT * FROM Temperatura_minuto;
 
-SELECT * FROM Lluvia_minuto;
+SELECT * FROM LLuvias;
+
+SELECT * FROM Riego;
 
 
 
-Zona(PK(id_zona), alto ,ancho,temperatura_ideal,hidratacion_diaria)
+DELETE FROM Humedad_minuto;
+
+Lugar(id_lugar,flujo_agua)
+Zona(PK(id_zona),FK(id_lugar), alto ,ancho,humedad_min,litros_metro)
 Aspersores(PK(id_aspersor),FK(id_zona))
-Plantas(id_planta,id_zona,tipo_planta)   
 Arduinos(id_arduino,id_zona)
-Sensores(id_sensor,id_arduino,id_zona,nombre)
-Humedad_minuto(fecha,hora, id_sensor,humedad)
+Sensores(id_sensor,id_arduino,tipo)
+Humedad_minuto(fecha, id_sensor,humedad)
 Temperatura_minuto(fecha,id_sensor,temperatura)
-Lluvia_minuto(fecha,hora, id_sensor,lluvia)
-LLuvias(id_lluvia ,fecha_i,fecha_f)
-Riego(id_riego,fecha_i,fecha_f,cant_agua,id_zona)
+LLuvias(id_sensor,fecha_i,fecha_f)
+Riego(fecha_i,fecha_f,cant_agua,id_zona)
+PK(fecha_i,id_zona)
